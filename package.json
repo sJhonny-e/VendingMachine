@@ -8,6 +8,7 @@
   },
   "author": "Jhonny",
   "dependencies": {
+    "lodash": "^4.11.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",

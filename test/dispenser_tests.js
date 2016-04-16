@@ -60,7 +60,7 @@ describe('Dispenser', function() {
 		it('dispenses and returns change if correct amount was paid', function() {
 			dispenser.currentSnack = snack;
 			
-			let changeObj = {'0.01' : 4, '1' : 6 };
+			let changeObj = [{ value: 1, amount : 4 }, { value: 20, amount: 6 }];
 			changeCalculator.expects('getChange').withExactArgs(5).returns(changeObj);
 
 			let result = dispenser.pay(25);
