@@ -15,7 +15,7 @@ describe('Dispenser', function() {
 
 	beforeEach(function() {
 		repository = { get: function() {} };
-		changeCalculator = { getChange: function() {} };
+		changeCalculator = { getChange: function() {}, addCoins: function() {} };
 
 		repository = sinon.mock(repository);
 		changeCalculator = sinon.mock(changeCalculator);
@@ -43,11 +43,15 @@ describe('Dispenser', function() {
 	});
 
 	describe('#pay', function() {
-		it('should just increase the balance if no snack was chosen yet', function() {
-			let result = dispenser.pay( {value: 5, amount: 2});
+		it('should just add coins and increase the balance if no snack was chosen yet', function() {
+			let coinsToPay = {value: 5, amount: 2};
+			changeCalculator.expects('addCoins').withExactArgs(coinsToPay);
+
+			let result = dispenser.pay(coinsToPay);
 
 			expect(result).to.eql(0);	// 0 left to pay, since no snack was chosen
 			expect(dispenser.balance).to.eql(10);
+			changeCalculator.verify();
 		});
 
 		it('should return the remaining amount if not enough has been payed yet', function() {
