@@ -12,6 +12,7 @@ run `npm test`
 ##Run
 run `npm run`  
 type in the `?` command to see how to use the command-line interface.
+* Note: all values are in pence (i.e price = 50 means 50p)  
 
 #About
 The main logic is the `Dispenser` object, which holds the current state of chosen snack and balance, receives snack choices and payments, and dispenses a snack when balance is sufficient.  
