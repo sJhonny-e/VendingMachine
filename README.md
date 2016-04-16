@@ -5,7 +5,7 @@ A user can pay coins into the machine, and select a product.
 Once the user has enough balance for the selected product, it's dispensed from the machine, and the user receives their change.  
 
 ##Install
-Prerequisites: node + npm
+Prerequisites: node + npm  
 run `npm install`
 ##Tests
 run `npm test`
