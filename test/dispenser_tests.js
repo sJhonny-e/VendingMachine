@@ -35,6 +35,7 @@ describe('Dispenser', function() {
 		it('should throw if no change can be given', function() {
 			repository.expects('get').returns(snack);
 			changeCalculator.expects('getChange').returns(null);
+			dispenser.balance = 1500;
 
 			expect(() => dispenser.getSnack('junior mint')).to.throw('sorry, no change can be given right now');
 
@@ -43,7 +44,7 @@ describe('Dispenser', function() {
 
 	describe('#pay', function() {
 		it('should just increase the balance if no snack was chosen yet', function() {
-			let result = dispenser.pay(10);
+			let result = dispenser.pay( {value: 5, amount: 2});
 
 			expect(result).to.eql(0);	// 0 left to pay, since no snack was chosen
 			expect(dispenser.balance).to.eql(10);
@@ -53,17 +54,17 @@ describe('Dispenser', function() {
 			dispenser.balance = 5;
 			dispenser.currentSnack = snack;
 
-			expect(dispenser.pay(10)).to.eql(5);	// 5 remaining to be paid
+			expect(dispenser.pay({value: 2, amount: 5})).to.eql(5);	// 5 remaining to be paid
 			expect(dispenser.balance).to.eql(15);
 		});
 
-		it('dispenses and returns change if correct amount was paid', function() {
+		it('dispenses and returns 80 in change if 100 was paid for a snack costing 20', function() {
 			dispenser.currentSnack = snack;
 			
 			let changeObj = [{ value: 1, amount : 4 }, { value: 20, amount: 6 }];
-			changeCalculator.expects('getChange').withExactArgs(5).returns(changeObj);
+			changeCalculator.expects('getChange').withExactArgs(80).returns(changeObj);
 
-			let result = dispenser.pay(25);
+			let result = dispenser.pay({value: 5, amount: 20});
 
 			expect(dispenser.balance).to.eql(0);
 			expect(snack.numItems).to.eql(2);
