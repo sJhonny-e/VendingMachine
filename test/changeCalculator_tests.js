@@ -1,4 +1,5 @@
 'use strict'
+let _ = require('lodash');
 
 let chai = require('chai');
 let expect = chai.expect;
@@ -52,5 +53,14 @@ describe('ChangeCalculator', function() {
 				]);
 		});
 
+	});
+
+	describe('#addCoins', function() {
+		it('adds the correct amount to the correct coin type', function() {
+			calculator.addCoins({value: 20, amount: 5});
+
+			let coinInstance = _.find(calculator.coins, {value: 20});
+			expect(coinInstance.amount).to.equal(6);
+		});
 	});
 })
