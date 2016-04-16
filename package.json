@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "A vending machine simulator. Exciting!!",
   "scripts": {
-    "test": "mochae",
+    "test": "mocha",
     "start": "node lib/main.js"
   },
   "author": "Jhonny",
